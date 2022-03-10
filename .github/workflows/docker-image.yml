@@ -51,3 +51,13 @@ jobs:
         uses: actions/checkout@master
         with:
           repository: zakariahoussa/gitops-app-config
+      - name: Update Image Version in the related HelmChart values.yaml
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          valueFile: 'application.yaml'
+          propertyPath: 'spec.template.spec.image'
+          value: ${{ env.IMAGE_NAME }}
+          branch: deployment
+          targetBranch: development
+          createPR: true
+          repository: zakariahoussa/gitops-app-config
