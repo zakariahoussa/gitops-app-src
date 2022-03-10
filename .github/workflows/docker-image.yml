@@ -2,10 +2,13 @@ name: Create and publish a Docker image
 
 on:
   workflow_dispatch:
-
+  push:
+    branches: 
+      - 'main'
+      
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ${{ github.repository }}:${{ github.sha }}
 
 jobs:
   build-and-push-image:
