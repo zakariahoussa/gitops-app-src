@@ -57,4 +57,5 @@ jobs:
           valueFile: 'application.yaml'
           propertyPath: 'spec.template.spec.image'
           value: ${{ env.IMAGE_NAME }}
-          repository: zakariahoussa/gitops-app-config
+          commitChange: false
+          updateFile: true
