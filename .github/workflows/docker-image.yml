@@ -31,11 +31,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
                   git config --global user.email "zak@gmail.com"
-                  git config --global user.name "zak"
-                  git clone https://${{secrets.ACCESS_TOKEN}}@github.com/zakariahoussa/gitops-app-config.git
+                  git config --global user.name "zakariahoussa"
                   git config --global credential.helper cache
+                  git clone https://${{secrets.ACCESS_TOKEN}}@github.com/zakariahoussa/gitops-app-config.git
                   git checkout -b titi
+                  git config --unset-all http.https://github.com/.extraheader
                   git push --set-upstream origin titi
+                  
       - name: Update values.yaml
         uses: fjogeleit/yaml-update-action@main
         with:
