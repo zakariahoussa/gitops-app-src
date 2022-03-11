@@ -37,7 +37,7 @@ jobs:
                   git checkout -b titi
                   git config --unset-all http.https://github.com/.extraheader
                   git config --global user.email "zak@gmail.com"
-                  git config --global user.name "zakariahoussa
+                  git config --global user.name "zakariahoussa"
                   git push --set-upstream origin titi
                   
       - name: Update values.yaml
