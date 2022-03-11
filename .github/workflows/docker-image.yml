@@ -24,12 +24,7 @@ jobs:
         
       - name: Check outputs
         run: echo ${{ steps.vars.outputs.sha_short }}
-        
-      - uses: peterjgrainger/action-create-branch@v2.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-        with:
-          branch: 'titi'        
+            
                   
       - name: Update values.yaml
         uses: fjogeleit/yaml-update-action@main
@@ -43,7 +38,9 @@ jobs:
           targetBranch: main
           createPR: true
           repository: zakariahoussa/gitops-app-config
-          message: 'Update Image Version' 
+          message: 'Update Image Version'
+          token:  ${{ secrets.PAT }}
+          
   build-and-push-image:
     needs: push-image-id
     runs-on: ubuntu-latest
