@@ -65,7 +65,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          branch: ${{ steps.vars.outputs.sha_short }}
+          branch: titi
           
       - name: Update values.yaml
         uses: fjogeleit/yaml-update-action@main
@@ -75,7 +75,7 @@ jobs:
           value: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.sha_short }}
           commitChange: true
           updateFile: true
-          branch: ${{ steps.vars.outputs.sha_short }}
+          branch: titi
           targetBranch: main
           createPR: true
           repository: zakariahoussa/gitops-app-config
