@@ -9,7 +9,6 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  SHORTSHA: $(git rev-parse --short=7 ${{ github.sha }})
 jobs:
 
   build-and-push-image:
@@ -54,17 +53,21 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: zakariahoussa/gitops-app-config
-          
+      - name: get shortsha
+        id: vars
+        run: |
+         echo ::set-output name=sha_short::$(git rev-parse --short=7 ${{ github.sha }})  
+         
         
       - name: Update values.yaml
         uses: fjogeleit/yaml-update-action@main
         with:
           valueFile: 'application.yaml'
           propertyPath: 'spec.template.spec.containers.0.image'
-          value: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.SHORTSHA }}
+          value: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.sha_short }}
           commitChange: true
           updateFile: true
-          branch: ${{ env.SHORTSHA }}
+          branch: ${{ steps.vars.outputs.sha_short }}
           targetBranch: main
           masterBranchName: main
           createPR: true
