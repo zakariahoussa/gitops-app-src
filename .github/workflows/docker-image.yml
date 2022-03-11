@@ -64,10 +64,10 @@ jobs:
         with:
           valueFile: 'application.yaml'
           propertyPath: 'spec.template.spec.containers.0.image'
-          value: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.sha_short }}
+          value: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${{ steps.vars.outputs.sha_short }}
           commitChange: true
           updateFile: true
-          branch: ${{ steps.vars.outputs.sha_short }}
+          branch: sha-${{ steps.vars.outputs.sha_short }}
           targetBranch: main
           masterBranchName: main
           createPR: true
