@@ -40,6 +40,7 @@ jobs:
           createPR: true
           repository: zakariahoussa/gitops-app-config
           message: 'Update Image Version'
+          token: ${{ secrets.PAT }}
           
   build-and-push-image:
     needs: push-image-id
