@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: demo
+  labels:
+    app: demo
+spec:
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause:
+            duration: 1m
+        - setWeight: 50
+        - pause:
+            duration: 2m
+      canaryService: demo-canary
+      stableService: demo
+      trafficRouting:
+        istio:
+          virtualService:
+            name: istio-vs
+            routes:
+              - primary
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: demo
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: demo
+        version: blue
+    spec:
+      containers:
+        - name: demo
+          image: ghcr.io/zakariahoussa/gitops-app-src:2d6dcee
+          imagePullPolicy: Always
+          ports:
+            - name: web
+              containerPort: 8080
+          resources:
+            requests:
+              memory: 64Mi
+              cpu: 100m
+            limits:
+              memory: 128Mi
+              cpu: 140m
