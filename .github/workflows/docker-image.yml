@@ -36,6 +36,7 @@ jobs:
           updateFile: true
           branch: titi
           targetBranch: main
+          masterBranchName: main
           createPR: true
           repository: zakariahoussa/gitops-app-config
           message: 'Update Image Version'
