@@ -51,7 +51,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         with:
-          repository: zakariahoussa/gitops-app-config 
+          repository: zakariahoussa/gitops-app-config
+          path: infrastructure
           
       - name: Set outputs
         id: vars
@@ -77,4 +78,5 @@ jobs:
           branch: ${{ steps.vars.outputs.sha_short }}
           targetBranch: main
           createPR: true
+          repository: zakariahoussa/gitops-app-config
           message: 'Update Image Version' 
