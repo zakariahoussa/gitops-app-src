@@ -28,7 +28,10 @@ jobs:
         
       - name: Generate API module
         run: |
+                  git config user.name "zakariahoussa"
+                  git config user.email "dev@example.com"
                   git checkout -b titi
+                  git push --set-upstream origin titi
                   
       - name: Update values.yaml
         uses: fjogeleit/yaml-update-action@main
