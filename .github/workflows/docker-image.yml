@@ -52,7 +52,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: zakariahoussa/gitops-app-config
-          path: infrastructure
           
       - name: Set outputs
         id: vars
