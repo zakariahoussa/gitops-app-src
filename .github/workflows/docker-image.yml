@@ -9,19 +9,6 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-permissions:
-  actions: write
-  checks: write
-  contents: write
-  deployments: write
-  discussions: write
-  issues: write
-  pages: write
-  packages: write
-  pull-requests: write
-  repository-projects: write
-  security-events: write
-  statuses: write
 jobs:
   push-image-id:
     runs-on: ubuntu-latest
@@ -42,8 +29,13 @@ jobs:
         run: |
                   git config user.name "zakariahoussa"
                   git config user.email "dev@example.com"
-                  git checkout -b titi
-                  git push --set-upstream origin titi
+
+      - uses: GuillaumeFalourd/create-other-repo-branch-action@v1
+        with:
+          repository_owner: zakariahoussa
+          repository_name: gitops-app-config
+          new_branch_name: titi
+          access_token: ${{ secrets.ACCESS_TOKEN}}
                   
       - name: Update values.yaml
         uses: fjogeleit/yaml-update-action@main
