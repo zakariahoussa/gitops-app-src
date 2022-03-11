@@ -60,11 +60,12 @@ jobs:
       - name: Check outputs
         run: echo ${{ steps.vars.outputs.sha_short }}
         
-      - uses: peterjgrainger/action-create-branch@v2.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: GuillaumeFalourd/create-other-repo-branch-action@v1
         with:
-          branch: titi
+          repository_owner: zakariahoussa
+          repository_name: gitops-app-config
+          new_branch_name: titi
+          access_token: ${{ secrets.ACCESS_TOKEN}}
           
       - name: Update values.yaml
         uses: fjogeleit/yaml-update-action@main
