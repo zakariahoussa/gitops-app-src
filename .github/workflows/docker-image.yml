@@ -54,22 +54,16 @@ jobs:
         with:
           repository: zakariahoussa/gitops-app-config
           
-      - name: Get short SHA
-        id: slug
-        run: echo "::set-output name=sha7::$(echo ${GITHUB_SHA} | cut -c1-7)"
-        
-      - name: Check outputs
-        run: echo ${{ steps.vars.outputs.sha_short }}
         
       - name: Update values.yaml
         uses: fjogeleit/yaml-update-action@main
         with:
           valueFile: 'application.yaml'
           propertyPath: 'spec.template.spec.containers.0.image'
-          value: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${{ steps.vars.outputs.sha_short }}
+          value: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           commitChange: true
           updateFile: true
-          branch: sha-${{ steps.vars.outputs.sha_short }}
+          branch: ${{ github.sha }}
           targetBranch: main
           masterBranchName: main
           createPR: true
