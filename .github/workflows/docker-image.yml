@@ -36,6 +36,8 @@ jobs:
                   git clone https://${{secrets.ACCESS_TOKEN}}@github.com/zakariahoussa/gitops-app-config.git
                   git checkout -b titi
                   git config --unset-all http.https://github.com/.extraheader
+                  git config --global user.email "zak@gmail.com"
+                  git config --global user.name "zakariahoussa
                   git push --set-upstream origin titi
                   
       - name: Update values.yaml
