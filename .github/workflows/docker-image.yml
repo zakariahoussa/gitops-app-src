@@ -9,6 +9,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  SHORTSHA: $(git rev-parse --short=7 ${{ github.sha }})
 jobs:
 
   build-and-push-image:
@@ -60,10 +61,10 @@ jobs:
         with:
           valueFile: 'application.yaml'
           propertyPath: 'spec.template.spec.containers.0.image'
-          value: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          value: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.SHORTSHA }}
           commitChange: true
           updateFile: true
-          branch: ${{ github.sha }}
+          branch: ${{ env.SHORTSHA }}
           targetBranch: main
           masterBranchName: main
           createPR: true
