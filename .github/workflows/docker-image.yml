@@ -35,7 +35,7 @@ jobs:
                   git config --global credential.helper cache
                   git clone https://${{secrets.ACCESS_TOKEN}}@github.com/zakariahoussa/gitops-app-config.git
                   git checkout -b titi
-                  git push --set-upstream origin titi
+                  git push https://${{secrets.ACCESS_TOKEN}}@github.com/zakariahoussa/gitops-app-config.git
       - name: Update values.yaml
         uses: fjogeleit/yaml-update-action@main
         with:
